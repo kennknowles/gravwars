@@ -1,0 +1,88 @@
+
+***** BUILDING
+
+Try this:
+
+	$ make
+
+It will probably not work, as this was a very weirdly-built class project
+at UC Berkeley with very particular requirements and systems. Good luck...
+
+****** RUNNING
+
+the command line options all correspond to items that are toggle-able mid-game as well.
+
+	-l / +l		A setting of +l enables low quality rendering, -l disables.
+				+l by default.
+
+	-s / +s		+s enables starry background, -s disables.
+				+s by default.
+
+	-p / +p		+p enables particles, -p disables
+				+p by default.
+
+	-q / +q		+q enables qwerty control mode, -q disables (enables dvorak)
+				-q by default
+
+	-g / +g		+g enables gravity, -g disables
+				-g by default
+
+the fastest settings would be
+
+	$ ./gravwars +l -s -p -g
+
+the fanciest is
+	
+	$ ./gravwars -l +s +p +g
+	
+	
+***************** PLAYING
+
+THE BACKGROUND
+
+	You are the pilot of the revolutionary gravitic drive Q-wing fighter.  It can propel itself
+	in any directien except backwards, and is equipped with photonicaliphragisizmic torpedos.
+
+	You are also just a garbage man assigned to eliminate some dangerous asteroids in a region
+	that is desirable for inter-galactic housing development.  Read on for mission details.
+	
+
+THE CONTROLS
+
+	Your Grav-O-Matic(tm) thrusters are controlled by the arrow keys and space bar.  space is
+	forward thrust and the arrows are lateral stabilizers.
+
+
+	Your pivot controls depend on whether you are dvorak or qwerty.
+
+	For dvorak, they are:
+
+	,	.	p		
+	o	e	u
+
+
+	, - roll left
+	p - roll right
+	. - pitch down
+	e - pitch up
+	o - turn left
+	u - turn right
+
+	For qwerty they are:
+
+	w	e	r
+	s	d	f
+
+	with the same configuration as above.  Note: you need to run ./gravwars +q for qwerty control.
+
+	Some other keys that are common to both layouts:
+
+	g - toggle <G>ravity
+	x - toggle particle effe<X>
+	i - toggle <I>nput mode (qwerty / dvorak)
+	b - toggle starry <B>ackground
+	v - toggle <V>isual quality
+	q - <Q>uit
+	
+
+Happy hunting!!

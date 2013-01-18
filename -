@@ -1,0 +1,85 @@
+#ifndef UPDATE_H
+#define UPDATE_H
+
+#include <iostream>
+#include <vector>
+#include <GL/gl.h>
+
+#include "../include/matrix.h"
+
+namespace gravwars {
+
+const double PI = 3.14159;
+
+typedef Vector3 Vertex3;
+
+class Entity {
+	public:
+		Vertex3 pos;
+		int glIndex;
+};
+
+class DirectedEntity : public Entity {
+	public:
+		Vector3 forwards;
+		Vector3 up;
+		Vector3 right; //negative x
+		
+		void rotate( double theta, const Vector3& axis );
+};
+
+class Planet : public Entity {
+	public:
+		double radius;
+		double mass;
+		float r, g, b;
+};
+
+class Ship : public DirectedEntity {
+	private:
+		Vector3 rotSensitivity;
+		Vector accel, vel;
+		Vector3 rotateRate; // corresponds to pitch, yaw, and roll in that order
+
+	public:
+		Ship();
+
+		double mass;
+	
+		void thrustOn();
+		void thrustOff();
+		void upOn();
+		void upOff();
+		void downOn();
+		void downOff();
+		void leftOn();
+		void leftOff();
+		void rightOn();
+		void rightOff();
+		void moveTime( double dtime );
+};
+
+// singleton class
+class Space {
+	private:
+		static int glIndexCounter;
+	
+	public:
+		static vector<Ship> ships;
+		static vector<Planet> planets;
+
+		static Vector3 max; //bounding planes of space
+		static Vector3 min;
+
+		static int nextIndex();
+		static void addPlanet(	double x, double y, double z,
+								double radius, double mass,
+								float r, float g, float b );
+
+		static void init();
+		static void destroy();
+};
+
+} // namespace
+
+#endif

@@ -1,0 +1,54 @@
+SUBSYSTEMS = input_sys video_sys update_sys main_sys
+TESTS = sys_tests
+
+CC=g++
+
+CCFLAGS = -ansi -g
+
+CFLAGS = $(CCFLAGS)
+
+OBJ = input/input.o main/main.o update/update.o video/video.o update/matrix.o main/flags.o
+
+all : $(SUBSYSTEMS) gravwars
+
+gravwars: input/control.h input/makeflag main/makeflag update/makeflag video/makeflag
+	$(CC) $(CFLAGS) $(LIB_DIR) $(COMMON_LIBS) -o gravwars $(OBJ)
+
+input_sys : 
+	cd input; gmake -f Makefile.dep	LIB_DIR="$(LIB_DIR)"\
+									INCLUDE_DIR="$(INCLUDE_DIR)"\
+									COMMON_LIBS="$(COMMON_LIBS)"\
+									CCFLAGS="$(CCFLAGS)"
+
+video_sys :
+	cd video; gmake -f Makefile.dep LIB_DIR="$(LIB_DIR)"\
+									INCLUDE_DIR="$(INCLUDE_DIR)"\
+									COMMON_LIBS="$(COMMON_LIBS)"\
+									CCFLAGS="$(CCFLAGS)"
+
+update_sys :
+	cd update; gmake -f Makefile.dep LIB_DIR="$(LIB_DIR)"\
+									INCLUDE_DIR="$(INCLUDE_DIR)"\
+									COMMON_LIBS="$(COMMON_LIBS)"\
+									CCFLAGS="$(CCFLAGS)"
+
+main_sys :
+	cd main; gmake -f Makefile.dep LIB_DIR="$(LIB_DIR)"\
+									INCLUDE_DIR="$(INCLUDE_DIR)"\
+									COMMON_LIBS="$(COMMON_LIBS)"\
+									CCFLAGS="$(CCFLAGS)"
+
+sys_tests :
+	cd tests; gmake -f Makefile.dep LIB_DIR="$(LIB_DIR)"\
+									INCLUDE_DIR="$(INCLUDE_DIR)"\
+									COMMON_LIBS="$(COMMON_LIBS)"\
+									CCFLAGS="$(CCFLAGS)"
+
+clean:
+	cd input; gmake -f Makefile.dep clean
+	cd video; gmake -f Makefile.dep clean
+	cd update; gmake -f Makefile.dep clean
+	cd main; gmake -f Makefile.dep clean
+	cd tests; gmake -f Makefile.dep clean
+	rm -f gravwars
+	rm -f gravwars.tar*

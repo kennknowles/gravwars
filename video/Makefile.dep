@@ -1,0 +1,19 @@
+CC=g++
+
+CCFLAGS = -ansi -g
+
+CFLAGS = $(CCFLAGS)
+
+OBJ = video.o
+
+all : makeflag
+
+makeflag : $(OBJ)
+	touch makeflag
+
+%.o : %.cpp ../include/*.h
+	$(CC) -c -o $@ $(CFLAGS) $(INCLUDE_DIR) $<
+
+clean:
+	rm -f *.o
+	rm -f makeflag

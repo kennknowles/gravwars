@@ -1,0 +1,35 @@
+CC = g++
+
+CCFLAGS = -ansi -g
+
+CFLAGS = $(CCFLAGS)
+
+INPUT_TESTS = dvorakmap getinput
+UPDATE_TESTS =
+VIDEO_TESTS = loadpng loadobj
+
+TESTS = $(UPDATE_TESTS) $(INPUT_TESTS) $(VIDEO_TESTS)
+
+all : $(TESTS)
+
+dvorakmap : dvorakmap.o ../input/input.o ../main/flags.o ../include/*.h
+	$(CC) -o dvorakmap $(CFLAGS) $(INCLUDE_DIR) dvorakmap.o ../input/input.o ../main/flags.o
+
+getinput : getinput.o ../input/input.o ../main/flags.o ../include/*.h
+	$(CC) -o getinput $(CFLAGS) $(INCLUDE_DIR) getinput.o ../input/input.o ../main/flags.o
+
+
+LOADPNG_OBJ = loadpng.o ../video/video.o ../input/input.o ../update/matrix.o ../main/flags.o ../update/update.o
+loadpng : $(LOAD_OBJ) ../include/*.h
+	$(CC) -o loadpng $(LIB_DIR) $(COMMON_LIBS) $(CFLAGS) $(INCLUDE_DIR) $(LOADPNG_OBJ)
+
+LOADOBJ_OBJ = loadobj.o ../video/video.o ../input/input.o ../update/matrix.o ../main/flags.o 
+loadobj : $(LOADOBJ_OBJ) ../include/*.h
+	$(CC) -o loadobj $(LIB_DIR) $(COMMON_LIBS) $(CFLAGS) $(INCLUDE_DIR) $(LOADOBJ_OBJ) 
+
+%.o : %.cpp ../include/*.h
+	$(CC) -c -o $@ $(CFLAGS) $(INCLUDE_DIR) $<
+
+clean :
+	rm -f *.o
+	rm -f $(INPUT_TESTS)
